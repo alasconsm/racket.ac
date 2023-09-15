@@ -1,6 +1,6 @@
 #lang sketching
 
-(define img (load-image "caryatids.jpg"))
+(define img (load-image "hollowknight.jpg"))
 
 (define small-point 4)
 (define large-point 40)
@@ -32,7 +32,7 @@
     [(equal? current-shape 'square) (rect x-pos y radius radius)]
     [(equal? current-shape 'diamond) (polygon2 x-pos y radius 4)])
   
-  (set! x-pos (+ x-pos (* move-direction 0.5)))
+  (set! x-pos (+ x-pos (* move-direction 0.3)))
   
   (when (or (< x-pos 0) (> x-pos (- width radius)))
   (set! move-direction (* -1 move-direction))))
