@@ -6,6 +6,8 @@
 (define large-point 40)
 (define current-shape 'diamond) ; Inicialmente, elige diamante como forma predeterminada
 (define current-size small-point) ; Tamaño predeterminado
+(define x-pos 0.0) ; Posición horizontal actual de la imagen
+(define move-direction 1) ; Dirección inicial de movimiento (1 para derecha, -1 para izquierda)
 
 (define (setup)
   (size 640 360)
@@ -16,16 +18,24 @@
 
 (define (draw)
   (define radius current-size)
-  (define x      (int (random (image-width img))))
-  (define y      (int (random (image-height img))))
-  (define pix    (image-get img x y))
+  (define y (int (random (image-height img))))
+
+  (let ([new-x-pos (if (< x-pos 0) 0 (if (> x-pos (- (width) 1)) (- (width) 1) x-pos))])
+    (set! x-pos new-x-pos))
+  
+  (define pix (image-get img (int x-pos) y))
   (fill pix 128)
   
   (cond
-    [(equal? current-shape 'circle) (circle x y radius)]
-    [(equal? current-shape 'triangle) (triangle x y (+ x radius) (+ y radius) (- x radius) (+ y radius))]
-    [(equal? current-shape 'square) (rect x y radius radius)]
-    [(equal? current-shape 'diamond) (polygon2 x y radius 4)]))
+    [(equal? current-shape 'circle) (circle x-pos y radius)]
+    [(equal? current-shape 'triangle) (triangle x-pos y (+ x-pos radius) (+ y radius) (- x-pos radius) (+ y radius))]
+    [(equal? current-shape 'square) (rect x-pos y radius radius)]
+    [(equal? current-shape 'diamond) (polygon2 x-pos y radius 4)])
+  
+  (set! x-pos (+ x-pos (* move-direction 0.5)))
+  
+  (when (or (< x-pos 0) (> x-pos (- width radius)))
+  (set! move-direction (* -1 move-direction))))
 
 (define (on-key-pressed)
   (define c key)
