@@ -16,7 +16,7 @@ Se aumentaron las funcionalidades detalladas a continuación:
 - Para aumentar o disminuir el tamaño del pincel de pueden utilizar:
     - a: reducir el tamaño en 5px.
     - s: aumentar el tamaño en 5px.
-- Se modificó para que la escena se vaya completando de derecha a izquierda en vez de aleatoriamente como en la versión original.
+- Se modificó para que la escena se vaya completando de izquierda a derecha en vez de aleatoriamente como en la versión original.
 
 ## Ejemplos de Funcionamiento
 Como se muestra en la figura a continuación la imagen se va completando de izquierda a derecha.
